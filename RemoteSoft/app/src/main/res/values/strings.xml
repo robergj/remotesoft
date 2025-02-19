@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">RemoteSoft</string>
+    <string name="logo_description">Logo de la aplicación</string>
+    <string name="datos_sensores">Datos sensores</string>
+    <string name="acerca_de">Acerca de</string>
+    <string name="info_app">
+        Aplicación desarollada por Roberto González Jiménez.
+        Su función es recoger el estado de la persona dependiente mediante sensores y una pulsera de actividad con el fin de enviarselo a una persona supervisora.
+        Para que funcione la app es necesario tener activada la Ubicación y el Bluetooth del teléfono y disponer de conexión a Internet.
+    </string>
+    <string name="boton_atras">Atrás</string>
+    <string name="datos_enunciado">DATOS </string>
+    <string name="tabla_pulsaciones">Pulsaciones</string>
+    <string name="tabla_acelerometro">Acelerómetro</string>
+    <string name="tabla_ubicacion">Ubicación</string>
+    <string name="no_vinculado">No está vinculado a ninguna pulsera</string>
+    <string name="vincular_pulsera">Vincular pulsera</string>
+    <string name="conf_ts">Configurar ThingSpeak</string>
+    <string name="tabla_caida">¿Caída?</string>
+    <string name="esca_disp">Escanear dispositivos</string>
+</resources>

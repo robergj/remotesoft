@@ -1,0 +1,135 @@
+Problemas encontrados:
+
+Semana 2:
+
+-Dificultad a la hora de poner el logo a la app, no se ajustaba correctamente y se veia un fondo negro.
+-No abrían las otras actividades, daba error, la solución fue añadirlas en el AndroidManifest.xml.
+
+Semana 3:
+
+-Dificultad con la lectura de GPS, no se actualizaba ya que requería de pedir los permisos, que se arreglo añadiendo código
+
+Semana 4:
+
+Para en un futuro poder enviar correctamente la información los lectores de ubicación y acelerometro tambien funcionan en la actividad principal, por lo que el codigo esta en las dos actividades.
+
+El lector de GPS es cambiado de GPS_PROVIDER a NETWORK_PROVIDER, ya que en la version del movil tardaba mucho en iniciarse el GPS y con este va más rapido.
+
+Añadir en build.gradle del modulo, en el apartado 'dependencies' : implementation 'com.zhaoxiaodan.miband:miband-sdk:1.1.2'
+https://github.com/pangliang/miband-sdk-android
+
+No me conecta al dispositivo en la actividad principal, se arreglará las siguientes semanas.
+
+Añadido parcialmente del repositorio en el que me he basado, una actividad que coge el dispositivo seleccionado con una lista de diferentes opciones, como vincular, vibracion, etc.
+
+
+Añadidas 2 actividades con sus corrrespondientes layouts, que se ajustaran más adelante
+
+En la actividad del escaneado de dispositivos para escanear se realizará mediante un switch, cuando esta off limpia la lista de dispositivos.
+
+Semana 5:
+
+Quitamos la actividad que usamos para probar la conectividad del repositorio de github.
+
+Metemos en todas las actividades menos la de acerca de y la de vinculacion, un metodo de conectar con  la pulsera para que no se pierda la conexion entre actividades, se mostrara en un text view abajo si esta conectada y a que dispositivo.
+
+Añadimos en esas actividades el listener de cambio de pulsaciones, luego nos vamos pasando entre actividades con el intentExtra el dispositivo al que estamos conectado.
+
+IMPORTANTE, para que funcione la lectura de pulsaciones necesitamos pasarle la informacion de la persona, para eso ejecutamos el metodo:
+
+UserInfo userInfo = new UserInfo(20271234, 1, 32, 180, 80, "Usuario", 0);
+                miBand.setUserInfo(userInfo);
+
+Para leer las pulsaciones necesitamos esperar un breve periodo de tiempo para que se pueda actualizar la informacion de la persona en la persona, para ello ejecutamos new Handler().postDelayed(), esto hace que despues de un periodo de tiempo indicado realice la serie de acciones que se indiquen, esperamos un tiempo y asignamos a la pulsera el listener de pulsaciones, ahora cada vez que scanee el listener cambiara el atributo que guarda las pulsaciones, esto se hará para la vista principal y la vista de lectura de datos.
+
+El metodo que llamara a la medida de pulsaciones se llama calcular_pulsaciones(), este metodo tendra dentro otro handler con un postdelayed que ejecutará el metodó de mirar las pulsaciones y dentro de este tambien habra otra llamada al handler que ejecutará otro post delayed del metodo en si tras 15 segundos, esto hará que se ejecute el metodo de mirar pulsaciones cada 15 segundos, este tiempo se ha elegido así ya que aproximadamente el tiempo máximo de medir pulsaciones es de 9 segundos y dejamos un margen de 5 segundos para poder ver los valores, no sobrecargar la pulsera y que no se le puedan acumular dos lecturas a la vez.
+
+Semana 6:
+
+Añadimos en el build.gradle del proyecto, en repositories:
+
+maven {
+            url "https://repo.eclipse.org/content/repositories/paho-releases/"
+        }
+
+Y en el build.gradle del modulo en dependencies:
+
+implementation('org.eclipse.paho:org.eclipse.paho.android.service:1.0.2') {
+        exclude module: 'support-v4'
+    }
+	
+Y en el fichero del manifest, dentro de <manifest>:
+
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+Y dentro de <application>:
+
+<service android:name="org.eclipse.paho.android.service.MqttService" >
+        </service>
+		
+Usuario y la contraseña del user de ThingSpeak:
+        options.setUserName("mwa0000022240279");
+        options.setPassword("OXEBXSCYAENX76QW".toCharArray());
+
+Prueba suscribir con MQTT.fx a nuestro proyecto:
+channels/(ID_CANAL)/subscribe/json/(READ_API_KEY del canal)
+
+channels/1362377/subscribe/json/XU2DIK5NBQDQP1ME
+
+Prueba para publicar en nuestro proyecto(otro key para escribir):
+
+channels/1362377/publish/Q38TDPXSWT30IT7T
+
+FIELDS:
+
+channels/1362377/publish/fields/field1/Q38TDPXSWT30IT7T
+
+channels/1362377/publish/fields/field2/Q38TDPXSWT30IT7T
+
+channels/1362377/publish/fields/field3/Q38TDPXSWT30IT7T
+
+Webs:
+Publish en MQTT Desktop client:
+https://es.mathworks.com/help/thingspeak/use-desktop-mqtt-client-to-publish-to-a-channel.html
+
+Suscribe en MQTT Desktop client:
+https://es.mathworks.com/help/thingspeak/use-desktop-mqtt-client-to-subscribe-to-channel-updates.html	
+
+Guia de como hacer MQTT en android (No ThingSpeak)
+https://www.youtube.com/watch?v=BAkGm02WBc0
+https://www.hivemq.com/blog/mqtt-client-library-enyclopedia-paho-android-service/
+
+Semana 7
+
+A la hora de enviar a ThingSpeak me di cuenta que no hace falta el usuario ni la key de mqtt, en cambio para recibir datos si hace falta
+
+La nueva app de recibir recibe correctamente del canal indicado, solo falta parsear el string
+
+Semana 8
+
+Añadido en el manifiesto y el build.gradle los descriptores necesarios para cargar el mapa en google maps
+
+https://www.youtube.com/watch?v=boyyLhXAZAQ
+
+Semana 10:
+
+Añadido sistema de deteccion de caidas
+Arreglar bugs
+Crear una clase pulsera con todo el tema de conectar y calcular pulsaciones
+Pasar datos a enviar por TS de String a sus respectivos tipos de datos
+
+Falta por solucionar:
+Como parar los handler(parar envio de datos y calculo de pulsaciones)
+
+
+Semana 11:
+
+Se intento duramente implementar el sistema de verificación de monitorización en un solo canal, pero fue imposible ya que en cada envio de mensaje solo se mandaban las variables deseadas, es decir que cuando se mandaba la confirmacion sola, los otros campos se e ponian a null, y esto creaba un caos en el Thingspeak.
+
+App casi terminada
+
+Semana 12 en adelante:
+Terminada la app, realizamos el informe
