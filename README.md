@@ -1,47 +1,43 @@
+# Prototype of a Teleassistance System for Dependent Individuals
+Nowadays, the use of mobile phones with internet connectivity has become widespread. This project aims to take advantage of this fact by using the mobile phone of dependent individuals as an intermediary node that receives data from sensors and makes it accessible to those responsible for supervision (family members, teleassistance operators, healthcare personnel, etc.).
 
-# Prototipo de sistema de teleasistencia para personas dependientes
-En la actualidad, el uso de teléfonos móviles con conexión a internet se ha generalizado. Este proyecto pretende aprovechar este hecho para utilizar el teléfono móvil de las personas dependientes como nodo intermediario que recibe los datos de los sensores y les hace accesibles a las personas encargadas de la supervisión (familiares, operadores de teleasistencia, personal sanitario, etc.).
+The main objective of the project is to develop a low-cost teleassistance system prototype based on the use of a mobile phone and a set of sensors. By carrying out this project, the student will gain experience in Android application development, wireless communication technology (e.g., Bluetooth), and embedded application development.
 
-El principal objetivo del proyecto sería el desarrollo de un prototipo de sistema de teleasistencia de bajo coste basado en el uso del teléfono móvil y un conjunto de sensores. Con la realización de este proyecto, el alumno adquirirá experiencia en: desarrollo de aplicaciones en Android; tecnología de comunicaciones inalámbricas (p.ej., Bluetooth); desarrollo de aplicaciones empotradas.
+The author of this work is **Roberto González Jiménez**.
 
-El autor de este trabajo es **Roberto González Jiménez**.
-
-**RemoteSoft**: Esta aplicación es la que tendrá instalada la persona dependiente en su teléfono móvil,
-esta app se encargará de recoger la información de los sensores y de la pulsera de actividad para
-enviárselo a la persona supervisora.
+**RemoteSoft**: This is the application that the dependent person will have installed on their mobile phone. This app will collect data from sensors and the activity wristband and send it to the supervising person.
 
 <p align="center">
   <img src="https://github.com/robergj/remotesoft/blob/main/Docs/Recursos/logo_app.png?raw=true" width="300">
 </p>
 
-**RemoteSoft Receives**: Esta aplicación es la que tendrá instalada la persona supervisora en su
-teléfono móvil, la app recibirá la información de los sensores captados por la app RemoteSoft y la
-mostrará al usuario con el fin de que la persona supervisora pueda monitorizar a la persona
-dependiente y estar informado de su estado actual.
+**RemoteSoft Receives**: This is the application that the supervising person will have installed on their mobile phone. The app will receive sensor data collected by the RemoteSoft app and display it to the user so that the supervisor can monitor the dependent person and stay informed about their current state.
+
 <p align="center">
   <img src="https://github.com/robergj/remotesoft/blob/main/Docs/Recursos/logo_app_receives.png?raw=true" width="300">
 </p>
 
-De manera resumida así funcionarían las dos aplicaciones entre sí:
+In summary, this is how the two applications work together:
 
 <p align="center">
   <img src="https://github.com/robergj/remotesoft/blob/main/Docs/Diagramas/Diagrama_app.png?raw=true" width="600">
 </p>
 
-De forma más detallada estas serían las llamadas que hacen en cada caso:
+In more detail, these are the calls made in each case:
+
 <p align="center">
   <img src="https://github.com/robergj/remotesoft/blob/main/Docs/Diagramas/Diagrama_detallado.png?raw=true" width="600">
 </p>
 
-## La estructura del repositorio es la siguiente:
+## Repository Structure:
 
-* **Docs**: Documentos y recursos utilizados en el proyecto.
+* **Docs**: Documents and resources used in the project.
 
-* **Releases**: APKs de las dos aplicaciones Android.
+* **Releases**: APKs of both Android applications.
 
-* **RemoteSoft**: Proyecto Android de la app RemoteSoft.
+* **RemoteSoft**: Android project for the RemoteSoft app.
 
-* **RemoteSoft_Receives**: Proyecto Android de la app RemoteSoft Receives.
+* **RemoteSoft_Receives**: Android project for the RemoteSoft Receives app.
 
 ![image](https://user-images.githubusercontent.com/60737807/109425388-4dd35080-79e8-11eb-90bd-ada8e34a3cc0.png)
 
